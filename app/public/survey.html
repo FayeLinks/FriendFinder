@@ -208,23 +208,24 @@
       var userData = {
         name: $("#name").val().trim(),
         photo: $("#photo").val().trim(),
-        sel1 = parseInt($("#sel1").val()),
-        sel2 = parseInt($("#sel2").val()),
-        sel3 = parseInt($("#sel3").val()),
-        sel4 = parseInt($("#sel4").val()),
-        sel5 = parseInt($("#sel5").val()),
-        sel6 = parseInt($("#sel6").val()),
-        sel7 = parseInt($("#sel7").val()),
-        sel8 = parseInt($("#sel8").val()),
-        sel9 = parseInt($("#sel9").val()),
-        sel10 = parseInt($("#sel10").val()),
+        scores:[
+        parseInt($("#sel1").val()),
+        parseInt($("#sel2").val()),
+        parseInt($("#sel3").val()),
+        parseInt($("#sel4").val()),
+        parseInt($("#sel5").val()),
+        parseInt($("#sel6").val()),
+        parseInt($("#sel7").val()),
+        parseInt($("#sel8").val()),
+        parseInt($("#sel9").val()),
+        parseInt($("#sel10").val())
+      ]
       };
-
+      
       // Question: What does this code do??
       $.post("/api/friends", userData)
         .then(function(data) {
-          console.log("friends.html", data);
-          alert("...");
+          console.log("friends.js", data);
         });
     });
   </script>
