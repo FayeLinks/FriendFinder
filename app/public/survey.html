@@ -7,13 +7,13 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Survey</title>
 
+<!-- Added link to the jQuery Library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
     <!-- Bootstrap -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
 
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-
-    <!-- Added link to the jQuery Library -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 </head>
 
@@ -195,10 +195,34 @@
     </div>
 
     <!-- Submit button -->
-    <button type="submit" class="btn btn-primary btn-lg submit" id="submit">Submit</button>
+    <button type="submit" class="btn btn-primary btn-lg submit" data-toggle="modal" data-target="#bestFriendModal" id="submit">Submit</button>
 
-<!-- Added link to the jQuery Library -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <!-- Modal after survey completion STILL NOT FUNCTIONING CORRECTLY -->
+		<div id="bestFriendModal" class="modal fade" role="dialog">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal">&times;</button>
+						<h3 class="modal-title">Your New Best Friend</h1>
+					</div>
+					<div class="modal-body">
+						<h2 id="bestFriend"></h2>
+						<img id="bestFriendPhoto" src="#">
+					</div>
+					<div class="modal-footer">
+						<button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+    <!-- API friend list and Github Repo Link -->
+    <footer class="footer">
+        <div class="container">
+          <p><a href="/api/friends">API Friends List</a> | <a href="https://github.com/FayeLinks/FriendFinder">GitHub Repo</a>
+        </div>
+      </footer>
+
 
 <script type="text/javascript">
     // Question: What does this code do?
@@ -209,25 +233,42 @@
         name: $("#name").val().trim(),
         photo: $("#photo").val().trim(),
         scores:[
-        parseInt($("#sel1").val()),
-        parseInt($("#sel2").val()),
-        parseInt($("#sel3").val()),
-        parseInt($("#sel4").val()),
-        parseInt($("#sel5").val()),
-        parseInt($("#sel6").val()),
-        parseInt($("#sel7").val()),
-        parseInt($("#sel8").val()),
-        parseInt($("#sel9").val()),
-        parseInt($("#sel10").val())
+        ($("#sel1").val()),
+        ($("#sel2").val()),
+        ($("#sel3").val()),
+        ($("#sel4").val()),
+        ($("#sel5").val()),
+        ($("#sel6").val()),
+        ($("#sel7").val()),
+        ($("#sel8").val()),
+        ($("#sel9").val()),
+        ($("#sel10").val())
       ]
       };
       
-      // Question: What does this code do??
-      $.post("/api/friends", userData)
-        .then(function(data) {
-          console.log("friends.js", data);
-        });
+      // Post user data into the api/friends 
+      $.post("/api/friends", userData, function(data) {
+// THIS AREA BELOW IS STILL THROWING AN ERROR "Uncaught TypeError: $(...).modal is not a function
+    // at Object.success"
+        $("#bestFriendModal").modal(data.name);
+          console.log(userData);
+          $("#bestFriend").text(userData.name);
+          $("#bestFriendPhoto").attr("src", userData.photo);
+          $("#bestFriendModal").modal("toggle");
+
+        $("#sel1").val("");
+        $("#sel2").val("");
+        $("#sel3").val("");
+        $("#sel4").val("");
+        $("#sel5").val("");
+        $("#sel6").val("");
+        $("#sel7").val("");
+        $("#sel8").val("");
+        $("#sel9").val("");
+        $("#sel10").val("");
+      });
     });
+
   </script>
 
 </body>
