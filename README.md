@@ -3,8 +3,8 @@
 ## A fast 10 question quiz to find a compatible friend! Simply answer the questions to the best of your ability and we will do the rest!
 
 
-## Check it out!: 
-[Open Here](#Herokulink "Friend Finder")
+## Check it out on Heroku!: 
+[Open Here](https://fast-basin-87021.herokuapp.com/ "Friend Finder")
 
 ## Code Example:
 
